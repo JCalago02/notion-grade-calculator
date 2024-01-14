@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="widget.css">
+    
+    <title>Document</title>
+</head>
+<body class="outside-container" id="widget-container">
+    <div class="nav" id="nav-bar">
+        <div id="1" class="tab-selector t1" onclick="handleTabChange(this)">Home</div>
+        <div id="2" class="tab-selector t2" onclick="handleTabChange(this)">Add Assigment</div>
+        <div id="3" class="tab-selector t3" onclick="handleTabChange(this)">Adjust Weights</div>
+    </div> 
+
+    <div id="s1" class="s1">
+        
+        <div id="empty-circle" class="circle absolute-center " style="--color: #252525; --radius: 200px;"></div>
+        <div id="filler-circle" class="circle filler absolute-center " style="--color: #3498db; --radius: 200px;"></div>
+        <div id="inner-circle" class="circle absolute-center " style="--color: #191919; --radius: 180px;"></div>
+        <div id="inner-label"class="center-label" style="--color: #3498db;"> NA </div>
+        
+        
+    </div>
+
+    <div id="s2" class="s2">
+        <div id="ass-con" class="assignment-container">
+            
+            <table class="assignment-table">
+                <colgroup>
+                    <col style="width: 49%;"/>
+                    <col style="width: 13%;"/>
+                    <col style="width: 13%;"/>
+                    <col style="width: 25%;"/>
+                </colgroup>
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Score</th>
+                        <th>Total</th>
+                        <th>Category </th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+            <div class="centered-flex">
+                <div id="add-assignment" class="edit-button" onclick='addAssignmentRow({}, getNextUniqueAssId())'>+ New</div> 
+                <div id="del-assignment" class="edit-button" onclick='toggleDeleteButtons()'>- Delete</div>
+            </div>
+        </div>
+        
+    </div>
+
+    <div id="s3" class="s3">
+        <div id="weigh-con" class="weight-container">
+            <table class="category-table">
+                <colgroup>
+                    <col style="width: 70%;"/>
+                    <col style="width: 30%;"/>
+                </colgroup>
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Weight (%)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+            <div class="centered-flex">
+                <div id="add-category" class="edit-button" onclick='addCategoryRow({}, getNextUniqueCatId())'>+ New</div>
+                <div id="del-category" class="edit-button" onclick='toggleDeleteButtons()'>- Delete</div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="widget.js"></script>
+</body>
+</html>

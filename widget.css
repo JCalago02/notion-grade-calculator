@@ -1,0 +1,147 @@
+.circle {
+    background-color: var(--color);
+    width: var(--radius);
+    height: var(--radius);
+    border-radius: 50%;
+
+    position: absolute;
+    left: calc(50% - 0.5 * var(--radius));
+    top: calc(50% - 0.5 * var(--radius));
+}
+
+.center-label {
+    width: 120px;
+    height: 75px;
+
+    position: absolute;
+    left: calc(50% - 57px);
+    top: calc(50% - 37.5px);
+
+    color: var(--color);
+    font-size: 2.3rem;
+    text-align: center;
+    vertical-align: middle;
+    line-height: 75px;
+}
+
+.outside-container {
+    background-color: #191919;
+    font-family: sans-serif, Arial, Helvetica;
+}
+
+.t1 {
+    color: #D6D6D6;
+    border-bottom: solid #D6D6D6;
+}
+
+.t2, .t3 {
+    color: #868686;
+}
+
+.s2, .s3 {
+    display: none;
+}
+
+.centered-flex {
+    display: flex;
+    justify-content: center;
+    
+}
+
+.nav {
+    margin: 0 auto;
+    width: 100%;
+    text-align: center;
+    
+    display: flex;
+    justify-content: center;
+}
+
+
+.tab-selector {
+    width: 200px;
+    cursor: pointer;
+    padding: 10px 0px;
+    border-radius: 5px;
+}
+
+.tab-selector:hover {
+    background-color: #3F4448;
+}
+
+.assignment-container, .weight-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 25px;
+}
+.edit-button {
+    color: #868686;
+    cursor: pointer;
+    padding: 5px 45px;
+    border: solid #868686 1px;
+    border-radius: 5px;
+    width: fit-content;
+    margin: 5px 10px;
+}
+
+.edit-button:hover {
+    background-color: #3F4448;
+}
+
+
+.assignment-table, .category-table {
+    border-collapse: collapse;
+    margin: 25px 0;
+    font-size: 0.9em;
+    border: solid #2F2F2F 3px;
+
+    table-layout: fixed;
+    width: 80%;
+}
+
+thead tr{ 
+    color:#fff;
+    text-align: left;
+    font-weight: bold;
+    border-bottom: solid #2F2F2F 1px;
+    
+}
+
+th, td {
+    border-right: solid #2F2F2F 1px;
+    background-color: #252525;
+    padding: 10px 10px;   
+    overflow: hidden;
+}
+
+.table-input {
+    background-color: #252525;
+    border: none;
+    border-bottom: solid transparent 2px;
+    color:#D6D6D6;
+    outline: none;
+    border-bottom: solid #2F2F2F 2px;
+    width: 90%;
+}
+
+.delete-button {
+    background-color: transparent;
+    border: solid transparent 0px;
+    border-radius: 5px;
+    color: #fff;
+    font-weight: bolder;
+    padding: none;
+
+    width: 20px;
+}
+
+.delete-button:hover {
+    background-color: #3F4448;
+    cursor: pointer;   
+}
+
+
+.mini-input {
+    width: 87%;
+}
