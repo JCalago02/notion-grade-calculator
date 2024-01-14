@@ -25,7 +25,7 @@
 }
 
 .outside-container {
-    background-color: #191919;
+    background-color: #252525;
     font-family: sans-serif, Arial, Helvetica;
 }
 
@@ -94,7 +94,7 @@
     border-collapse: collapse;
     margin: 25px 0;
     font-size: 0.9em;
-    border: solid #2F2F2F 3px;
+    border: solid #3f3f3f 1px;
 
     table-layout: fixed;
     width: 80%;
@@ -104,24 +104,24 @@ thead tr{
     color:#fff;
     text-align: left;
     font-weight: bold;
-    border-bottom: solid #2F2F2F 1px;
+    border-bottom: solid #3f3f3f 1px;
     
 }
 
 th, td {
-    border-right: solid #2F2F2F 1px;
-    background-color: #252525;
+    border-right: solid #3f3f3f 1px;
+    border-bottom: solid #3f3f3f 1px;
+    background-color: #313131;
     padding: 10px 10px;   
     overflow: hidden;
 }
 
 .table-input {
-    background-color: #252525;
+    background-color: #313131;
     border: none;
     border-bottom: solid transparent 2px;
     color:#D6D6D6;
     outline: none;
-    border-bottom: solid #2F2F2F 2px;
     width: 90%;
 }
 
