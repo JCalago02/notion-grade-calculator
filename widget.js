@@ -63,7 +63,7 @@ function swapTabs(prev, next) {
 }
 
 function handleTabChange(elem) {
-    const savedItem = sessionStorage.getItem('currIndex');
+    const savedItem = localStorage.getItem('currIndex' + className);
     const retrievedItem = JSON.parse(savedItem);
     let prevIndex = retrievedItem ? retrievedItem : '1';
 
@@ -80,7 +80,7 @@ function handleTabChange(elem) {
 
         // store new tab in local storage
         const jsonToSave = JSON.stringify(elem.id);
-        sessionStorage.setItem('currIndex', jsonToSave);
+        localStorage.setItem('currIndex' + className, jsonToSave);
     }
 }
 
@@ -111,8 +111,8 @@ function handleItemInput(idNum, isAssignmentsPage) {
     }
 
     // grab current page's list from local storage, filter out old entry and replace with new
-    const sessionStorageKey = isAssignmentsPage ? "assignmentList" : "categoryList";
-    const itemListJSON = sessionStorage.getItem(sessionStorageKey);
+    const localStorageKey = isAssignmentsPage ? "assignmentList" : "categoryList";
+    const itemListJSON = localStorage.getItem(localStorageKey + className);
     let filteredItemList = [];
     if (itemListJSON !== null) {
         const storedCategoryList = JSON.parse(itemListJSON);
@@ -126,7 +126,7 @@ function handleItemInput(idNum, isAssignmentsPage) {
     // store the newly formatted list back into local storage
     const newItemListJSON = JSON.stringify(filteredItemList);
     console.log(filteredItemList);
-    sessionStorage.setItem(sessionStorageKey, newItemListJSON);
+    localStorage.setItem(localStorageKey + className, newItemListJSON);
 
     // change the assignment page to reflect any changes to the category list
     if (!isAssignmentsPage) {
@@ -147,7 +147,7 @@ function createInputElement(inputType, className, value, id, inputOnChange) {
 }
 
 function createCategoryList() {
-    const savedCategories = sessionStorage.getItem('categoryList');
+    const savedCategories = localStorage.getItem('categoryList' + className);
     const categoryList = JSON.parse(savedCategories);
 
     const optionElemList = [];
@@ -228,14 +228,14 @@ function deleteItem(idNum, isAssignmentsPage) {
     // delete the associated item from local storage
     const intIdNum = parseInt(idNum);
 
-    const sessionStorageKey = isAssignmentsPage ? 'assignmentList' : 'categoryList';
-    const retrievedItem = sessionStorage.getItem(sessionStorageKey);
+    const localStorageKey = isAssignmentsPage ? 'assignmentList' : 'categoryList';
+    const retrievedItem = localStorage.getItem(localStorageKey + className);
     const storedItemList = JSON.parse(retrievedItem);
     const filteredItemList = storedItemList.filter((e) => e.id !== parseInt(intIdNum));
 
     // place filtered list back into local storage
     const filteredItemListJSON = JSON.stringify(filteredItemList);
-    sessionStorage.setItem(sessionStorageKey, filteredItemListJSON);
+    localStorage.setItem(localStorageKey + className, filteredItemListJSON);
 
     if (!isAssignmentsPage) {
         syncAllSelectInputs();
@@ -308,7 +308,7 @@ function syncAllSelectInputs() {
     }
 
     // sync all assignments in local storage to updated category list
-    const retrievedAssignmentJSON = sessionStorage.getItem("assignmentList");
+    const retrievedAssignmentJSON = localStorage.getItem("assignmentList" + className);
     const retrievedAssignmentList = JSON.parse(retrievedAssignmentJSON);
     for (let i = 0; i < retrievedAssignmentList.length; i++) {
         const assignment = retrievedAssignmentList[i];
@@ -319,14 +319,14 @@ function syncAllSelectInputs() {
 
     // return assignmentList back into JSON and store in local storage
     const newAssignmentListJSON = JSON.stringify(retrievedAssignmentList);
-    sessionStorage.setItem("assignmentList", newAssignmentListJSON);
+    localStorage.setItem("assignmentList" + className, newAssignmentListJSON);
 }
 
 let weightDeleteStateOn = false;
 let assignmentDeleteStateOn = false;
 function toggleDeleteButtons() {
     // determine which table page we currently are on
-    const savedIndex = sessionStorage.getItem('currIndex');
+    const savedIndex = localStorage.getItem('currIndex' + className);
     const retrievedIndex = JSON.parse(savedIndex); 
     const isAssignmentsPage = retrievedIndex === "2";
 
@@ -350,8 +350,8 @@ function toggleDeleteButtons() {
 
 function calculateGrade() {
     // attempt to fetch assignments + categories from local storage
-    const retrievedAssignments = sessionStorage.getItem("assignmentList");
-    const retrievedCategories = sessionStorage.getItem("categoryList");
+    const retrievedAssignments = localStorage.getItem("assignmentList" + className);
+    const retrievedCategories = localStorage.getItem("categoryList" + className);
     if (!retrievedAssignments || !retrievedCategories) {
         return null;
     }
@@ -415,14 +415,20 @@ function setHomeDisplay() {
 
 // code that runs on page load ---------------------------------------------------
 
+// extract the className from the url
+const queryString = window.location.search;
+const urlParams = new URLSearchParams(queryString);
+const retrievedClass = urlParams.get('className');
+const className = retrievedClass ? retrievedClass : "null";
+
 // swap to the previously selected page
-const savedIndex = sessionStorage.getItem('currIndex');
+const savedIndex = localStorage.getItem('currIndex' + className);
 const retrievedIndex = JSON.parse(savedIndex);
 let currIndex = retrievedIndex ? retrievedIndex : '1';
 swapTabs('1', currIndex);
 
 // add all category rows
-const savedCategories = sessionStorage.getItem('categoryList');
+const savedCategories = localStorage.getItem('categoryList' + className);
 const categoryList = JSON.parse(savedCategories);
 const newCategoryList = [];
 if (categoryList !== null && categoryList.length !== 0) {
@@ -441,11 +447,11 @@ if (categoryList !== null && categoryList.length !== 0) {
 }
 // reset all ids based on order in json list (or add empty list if it doesn't exist)
 const newCategoryListJSON = JSON.stringify(newCategoryList);
-sessionStorage.setItem("categoryList", newCategoryListJSON);
+localStorage.setItem("categoryList"  + className, newCategoryListJSON);
 
 
 // add all assignment rows
-const savedAssignments = sessionStorage.getItem('assignmentList');
+const savedAssignments = localStorage.getItem('assignmentList' + className);
 const assignmentList = JSON.parse(savedAssignments);
 const newAssignmentList = [];
 if (assignmentList !== null && assignmentList.length !==0) {
@@ -465,7 +471,7 @@ if (assignmentList !== null && assignmentList.length !==0) {
 }
 // reset all ids based on order in json list (or add empty list if it doesn't exist)
 const newAssignmentListJSON = JSON.stringify(newAssignmentList);
-sessionStorage.setItem("assignmentList", newAssignmentListJSON);
+localStorage.setItem("assignmentList" + className, newAssignmentListJSON);
 
 
 let uniqueCatId = categoryList ? categoryList.length : 0; 
@@ -481,6 +487,7 @@ function getNextUniqueAssId() {
 }
 
 setHomeDisplay();
+
 
 
 
